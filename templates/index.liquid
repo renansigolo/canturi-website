@@ -1,0 +1,11 @@
+<div class="index-sections">
+  {{ content_for_index }}
+</div>
+
+{% if settings.show_promo_modal %}
+<div id="delayModal" style="display: none">
+	{% include 'modal' %}
+</div>
+{% endif %}
+
+{% include 'modal-toast' %}

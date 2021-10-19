@@ -1,0 +1,34 @@
+<!-- /snippets/products-related-collection.liquid -->
+    <div class="product-grid">
+      {%- case recommendations.products_count -%}
+        {%- when 1 -%}
+          {%- assign grid_width_large = 'large-up--one-third large-up--push-one-third' -%}
+          {%- assign grid_width_medium = 'medium--one-third push--medium--one-third' -%}
+        {%- when 2 -%}
+          {%- assign grid_width_large = 'large-up--one-half' -%}
+          {%- assign grid_width_medium = 'medium--one-half' -%}
+        {%- when 3 -%}
+          {%- assign grid_width_large = 'large-up--one-third' -%}
+          {%- assign grid_width_medium = 'medium--one-third' -%}
+        {%- when 4 -%}
+          {%- assign grid_width_large = 'large-up--one-quarter' -%}
+          {%- assign grid_width_medium = 'medium--one-half' -%}
+          {%- assign grid_width_small = 'small--one-half' -%}
+        {%- when 5 -%}
+          {%- assign grid_width_large = 'large-up--one-fifth' -%}
+          {%- assign grid_width_medium = 'medium--one-third' -%}
+          {%- assign grid_width_small = 'small--one-half' -%}
+        {%- when 6 -%}
+          {%- assign grid_width_large = 'large-up--one-sixth' -%}
+          {%- assign grid_width_medium = 'medium--one-third' -%}
+          {%- assign grid_width_small = 'small--one-half' -%}
+        {%- else -%}
+          {%- assign grid_width_large = 'large-up--one-quarter' -%}
+          {%- assign grid_width_medium = 'medium--one-third' -%}
+          {%- assign grid_width_small = 'small--one-half' -%}
+      {%- endcase -%}
+      
+      {%- for product in product.collections[0].products limit:section.settings.limit -%}
+        {% include 'product-grid-item', quick_view: settings.quickview_enable %}
+      {%- endfor -%}
+    </div>

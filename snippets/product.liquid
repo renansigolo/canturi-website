@@ -1,0 +1,198 @@
+<!-- /snippets/product.liquid -->
+
+
+<div class="product__wrapper product__wrapper--{{ section.settings.image_layout }}">
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_media.preview_image | default: product.featured_media.preview_image -%}
+  {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+  {%- assign hide-bullets = false -%}
+  
+  {%- if section.settings.show_breadcrumbs -%}
+    <nav class="breadcrumbs">
+      <small>
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a><span class="breadcrumbs__arrow">{% include 'icon-arrow-right' %}</span>
+
+        {% if template contains 'product' %}
+          {% assign first_collection = product.collections[0] %}
+          {% if first_collection.handle != blank %}
+            {{ first_collection.title | link_to: first_collection.url }}
+            <span class="breadcrumbs__arrow">{% include 'icon-arrow-right' %}</span>
+          {% endif %}
+
+          <span>{{ product.title }}</span>
+        {% endif %}
+
+        {% if template contains 'collection' %}
+          {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a><span class="breadcrumbs__arrow">{% include 'icon-arrow-right' %}</span>{% endif %}
+        {% endif %}
+      </small>
+    </nav>
+  {%- endif -%}
+
+  <div class="grid product__page">
+    <div class="grid__item medium-up--one-half">
+      <div class="product__slides product-single__photos" data-product-slideshow data-product-single-media-group>
+        {% for media in product.media %}
+          {% include 'media', media: media, featured_media: featured_media, sectionkey: section.id %}
+        {% endfor %}
+      </div>
+
+      {% assign first_3d_model = product.media | where: "media_type", "model" | first %}
+      {% if first_3d_model %}
+        <button
+          class="btn btn--light btn--ar product-single__view-in-space"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ first_3d_model.id }}"
+          data-shopify-title="{{ product.title }}"
+          data-shopify-xr-hidden>
+          {% include 'icon-media-model' %}
+          <span class="product-single__view-in-space-text">{{ 'products.general.view_space' | t }}</span>
+        </button>
+      {% endif %}
+
+      <noscript>
+        {% for image in product.media %}
+          <img src="{{ image.preview_image | img_url: '900x' }}" alt="{{ image.alt | default: product.title  }}">
+        {% endfor %}
+      </noscript>
+      {% if product.media.size > 1 %}
+        <div data-product-thumbs class="product__thumbs--square"></div>
+      {%- endif -%}
+    </div>
+        
+    <div class="grid__item medium-up--one-half">
+      <div class="form__wrapper{% unless current_variant.available %} variant--soldout{% endunless %}" data-form-wrapper>
+        <div class="form__inner__wrapper">
+          <div class="form__width">
+            <div class="product__title__wrapper">
+              <h1 class="product__title">{{ product.title }}</h1>
+              <div class="h5--body product__price" data-price-wrapper>
+                <span data-product-price {% if current_variant.compare_at_price > current_variant.price %} class="product__price--sale"{% endif %}>
+                {% if product.title == "Diamond Engagement Rings" %}
+                From
+                {% endif %}
+                
+                {% if product.title == "Primavera Diamond Engagement Ring" %}
+                P.O.A
+                {% else %}
+                {{ current_variant.price | money_with_currency }}
+                {% endif %}
+                </span>
+
+                {% if product.compare_at_price_max > product.price %}
+                  <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                  <s class="product__price--strike" data-compare-price>
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money_with_currency }}
+                    {% endif %}
+                  </s>
+                {% endif %}
+              </div>
+            </div>
+
+            {%- if settings.enable_product_reviews -%}
+              <div class="product__badge">
+                {%- if settings.enable_yotpo and settings.yotpo_ID != '' -%}
+                  <div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
+                {%- else -%}
+                  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                  <a href="#reviews-scroll">{{ 'products.product.reviews_link' | t }}</a>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <div class="product__form">
+              {% include 'product-form', buybutton_setting: section.settings.show_payment_button %}
+            </div>
+
+            {%- assign description_position = '' -%}
+            {%- assign product_description_content = product.description -%}
+            {%- assign has_tabs = false -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == "tab_description" -%}
+                {%- assign has_tabs = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%-if has_tabs -%}
+              {%- assign product_description_content = product_description_content | split: '<h6>' | first -%}
+            {%- endif -%}
+            
+            <div class="product-description rte">              
+              {{ product_description_content }}                            
+
+                {% for tag in product.tags %}
+                  {% if tag == 'no-bullet-points' %}
+              		{%- assign hide-bullets = true -%}
+                  {% endif %}
+                {% endfor %}
+              
+              {% capture mailto %}
+                href="mailto:{{shop.email}}?subject=Jewellery%20Enquiry%20-%20{{ current_variant.sku }}%20-%20{{product.title}}&body=I'd%20love%20more%20info%20regarding%20the%20{{product.title}}"
+              {% endcapture %}
+              
+              <ul style="margin-top: -22px;">
+                {% if product.type == 'Rings' and hide-bullets == false %}
+                  <li>If your ring size is not listed, please contact <a {{ mailto }}>shop@canturi.com</a></li>
+                {% endif %}
+                
+                {% unless product.type == 'Gift Card' or hide-bullets == true %}
+                  <li>Handcrafted in Australia</li>
+                  </ul>
+                  <p style="margin-top: -22px;">
+                      <strong>
+                          <br />
+                          DELIVERY
+                      </strong>
+                  </p>
+                  <br />
+                  <ul style="margin-top: -22px;">
+                      <li>Collect In-store</li>
+                      <li>Courier delivery within Australia</li>
+                  </ul>
+                {% endunless %}
+            </div>
+            
+            {%- if section.blocks.size > 0 and section.settings.tabs_enable -%}
+              <div class="tabs-wrapper productTabsWrapper">
+                {% include 'product-tabs' %}
+              </div>
+            {%- endif -%}
+
+            {% if section.settings.product_show_vendor and product.vendor %}
+              <p class="product__vendor caps">{{ 'products.product.vendor' | t }}: <a href="{{ product.vendor | url_for_vendor }}" class="text-link">{{ product.vendor }}</a></p>
+            {%- endif -%}
+
+            {% if section.settings.show_share_buttons %}
+              <div class="product__sharing">
+                {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media.preview_image %}
+              </div>
+            {% endif %}
+
+            {%- if settings.enable_product_reviews -%}
+              {%- if settings.enable_yotpo and settings.yotpo_ID != '' -%}
+                {% include 'yotpo-reviews' %}
+              {%- else -%}
+                <div class="product__reviews" id="reviews-scroll">
+                  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% unless product == empty %}
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+  <script type="application/json" id="ModelJson-{{ section.id }}">
+    {{ product.media | where: 'media_type', 'model' | json }}
+  </script>
+{% endunless %}
+

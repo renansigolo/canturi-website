@@ -1,0 +1,115 @@
+<div
+  class="modal__overlay modal__overlay--newsletter modal__overlay--share-product"
+  id="ShareProductModal"
+  style="display: none;"
+>
+  <section class="modal__outer">
+    <div class="modal__wrapper">
+      <div class="modal--newsletter modal--share-product">
+        <div class="image-with-text-section">
+          <div
+            class="image-with-text-wrapper image-with-text-wrapper--reverse image-with-text-wrapper--no-image"
+          >
+            <div class="image-with-text__text">
+              <div class="image-with-text__inner">
+                <p class="modal__subtitle">Hint Hint</p>
+                <div class="modal__description rte">
+                  <img src="{{ product | img_url }}">
+                </div>
+                <form
+                  method="post"
+                  id="contact_form"
+                  accept-charset="UTF-8"
+                  class="contact-form"
+                >
+                  <input type="hidden" name="form_type" value="hint-hint" />
+                  <input type="hidden" name="productTitle" value="{{ product.title }}" />
+                  <input type="hidden" name="productUrl" value="http://shop.canturi.com{{ product.url }}" />
+                  <input type="hidden" name="productImageUrl" value="https:{{ product | img_url: "large" }}" />
+
+                  <div class="modal-input__container">
+                    <input
+                      type="text"
+                      name="recipientName"
+                      placeholder="Recipient's Name"
+                      required
+                    />
+
+                    <input
+                      type="email"
+                      name="recipientEmail"
+                      placeholder="Recipient's Email"
+                      id="email"
+                      required
+                    />
+                    
+                    <hr>
+                    
+                   <input
+                      type="text"
+                      name="customerName"
+                      placeholder="Your Name"
+                      required
+                    />
+
+                    <textarea
+                      cols="30"
+                      rows="3"
+                      style="resize: none;"
+                      name="customerMessage"
+                      id="customerMessage"
+                      placeholder="Your Message."
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="input-group newsletter-form send_hint">
+                    <span class="input-group-btn">
+                      <input
+                        type="submit"
+                        class="btn caps"
+                        name="subscribe"
+                        id="subscribe"
+                        value="Send"
+                      />
+                    </span>
+                  </div>
+				  <p class="sending_hint" style="margin: 10px 0; display: none">Sending...</p>
+                  <a
+                    href="//shop.canturi.com/policies/privacy-policy"
+                    target="_blank"
+                    style="font-size: 0.7rem;"
+                    >Privacy Policy</a
+                  >
+                </form>
+              </div>
+              <div id="modal-response">
+                <h2>
+                  Your hint has been sent!
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="close">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            class="icon icon-close-thin"
+            viewBox="0 0 27 27"
+          >
+            <g
+              stroke="#979797"
+              fill="none"
+              fill-rule="evenodd"
+              stroke-linecap="square"
+            >
+              <path d="M.5.5l26 26M26.5.5l-26 26"></path>
+            </g>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
