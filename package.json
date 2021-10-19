@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy": "theme deploy --allow-live",
-    "watch": "sass --watch --style=compressed scss/theme.scss:assets/theme.css",
+    "watch": "sass --watch --style=compressed assets/theme.scss:assets/theme.css",
+    "dev": "theme watch --allow-live",
     "start": "(npm run watch) & theme watch --allow-live",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
