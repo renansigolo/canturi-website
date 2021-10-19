@@ -1,0 +1,26 @@
+{
+  "name": "canturi-website",
+  "version": "1.0.0",
+  "description": "Canturi Shopify Website",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "theme deploy --allow-live",
+    "watch": "sass --watch --style=compressed scss/theme.scss:assets/theme.css",
+    "start": "(npm run watch) & theme watch --allow-live",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renansigolo/canturi-website.git"
+  },
+  "keywords": [
+    "canturi",
+    "shopify"
+  ],
+  "author": "Renan Sigolo <renan.sigolo@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renansigolo/canturi-website/issues"
+  },
+  "homepage": "https://github.com/renansigolo/canturi-website#readme"
+}
