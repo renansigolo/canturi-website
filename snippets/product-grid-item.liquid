@@ -103,8 +103,8 @@
                 <small>{{ 'products.general.from' | t }}</small>
               {% endunless %}
           		{{ product.price_min | money_with_currency }}
-            {% elsif product.id == 6650643972205 %}
-              P.O.A
+            {% elsif product.metafields.global.custom_description %}
+              {{ product.metafields.global.custom_description.value }}
             {% else %}
               {{ product.price_min | money_with_currency }}
             {% endif %}

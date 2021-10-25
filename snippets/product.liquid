@@ -73,8 +73,9 @@
                 From
                 {% endif %}
                 
-                {% if product.title == "Primavera Diamond Engagement Ring" %}
-                P.O.A
+                
+                {% if product.metafields.global.custom_description %}
+                  {{ product.metafields.global.custom_description.value }}
                 {% else %}
                 {{ current_variant.price | money_with_currency }}
                 {% endif %}
