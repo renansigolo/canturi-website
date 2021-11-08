@@ -52,7 +52,7 @@
     {% endfor %}
   </select>
 
-  {% if product.title != "Diamond Engagement Rings" and product.id != 6650643972205 %}
+  {% if product.metafields.global.custom_description.value != "P.O.A" and product.title != "Diamond Engagement Rings" %}
     <div class="js-qty quantity-selector">
       <label for="Quantity" class="label-hidden">{{ 'products.product.quantity' | t }}</label>
       <span class="js-qty__adjust js-qty__adjust--minus quantity__minus" tabindex="0">{% include "icon-minus" %}</span>
@@ -63,7 +63,7 @@
 
   <div class="product__submit {% if buybutton_setting %}product__submit--spb{% endif %}" data-product-id="{{product.id}}">
     <div class="product__submit__buttons">
-	{% if product.title != "Diamond Engagement Rings" and product.id != 6650643972205 %}
+	{% if product.metafields.global.custom_description.value != "P.O.A" and product.title != "Diamond Engagement Rings" %}
       <button
         type="submit"
         name="add"
