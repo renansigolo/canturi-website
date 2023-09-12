@@ -1,0 +1,79 @@
+<!-- /templates/payments.liquid -->
+
+<section class="page">
+  <h2 class="theme">{{ page.title }}</h2>
+  {{ page.content }}
+  {% comment %}
+    <h4 style="text-align: center;">
+      Please enter the following information to make online payments for your Canturi purchase.
+    </h4>
+  {% endcomment %}
+
+  <div id="paymentSection">
+    <form id="paymentGateway" class="payment-gateway">
+      <div style="display: flex; flex-direction: column">
+        <input type="hidden" name="currency" value="AUD">
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Your Full Name"
+          autocomplete="name"
+          required
+        >
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          autocomplete="email"
+          required
+        >
+
+        <input
+          type="text"
+          name="staffName"
+          placeholder="Canturi Staff Name (e.g Lucia)"
+          required
+        >
+
+        <div style="display: flex; justify-content: space-between;">
+          <select name="store" style="width: 100%;" placeholder="Select a store" required>
+            <option value="" selected disabled hidden>Select a store</option>
+            <option value="Sydney">Sydney</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Brisbane">Brisbane</option>
+          </select>
+        </div>
+
+        <input type="number" name="amount" placeholder="Amount (AUD) $" step=".01" required>
+      </div>
+
+      <div class="input-group newsletter-form send_form" id="send_form">
+        <span class="input-group-btn">
+          <input
+            id="submitPayment"
+            type="submit"
+            class="btn caps"
+            name="send"
+            value="Continue"
+          >
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <section id="paymentRedirected" style="flex-direction: column; text-align: center; display: none; margin-top: 64px">
+    <h2>You'll now be redirected to a secure payment gateway!</h2>
+    <p>
+      Once your payment has been processed we'll be in touch with you.
+      <br>
+      Thank you!
+    </p>
+  </section>
+</section>
+
+{% comment %}
+  <dialog id="modal-response">
+  	<h2>Something went wrong!</h2>
+  </dialog>
+{% endcomment %}

@@ -6,8 +6,9 @@
   "scripts": {
     "deploy": "theme deploy --allow-live",
     "watch": "sass --watch --style=compressed assets/theme.scss:assets/theme.css",
-    "dev": "theme watch --allow-live",
-    "start": "(npm run watch) & theme watch --allow-live",
+    "dev": "theme watch",
+    "build": "sass --style=compressed assets/theme.scss assets/theme.css",
+    "start": "(npm run watch) & theme watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,17 @@
   "bugs": {
     "url": "https://github.com/renansigolo/canturi-website/issues"
   },
-  "homepage": "https://github.com/renansigolo/canturi-website#readme"
+  "homepage": "https://github.com/renansigolo/canturi-website#readme",
+  "dependencies": {
+    "sass": "1.63.6"
+  },
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "1.2.1",
+    "prettier": "3.0.0"
+  },
+  "prettier": {
+    "plugins": [
+      "@shopify/prettier-plugin-liquid"
+    ]
+  }
 }

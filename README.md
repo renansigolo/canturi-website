@@ -12,7 +12,7 @@ The scripts are currently configured to update the Active theme on https://cantu
 
 To download all the latest version of the theme from the production environment run the [following script](https://shopify.dev/themes/tools/theme-kit/getting-started#step-4-set-up-your-config-file)
 
-> The private keys/variable can be found in the [Dashlane Secure Notes - Tan+Cheek](https://www.dashlane.com/)
+> The private keys/variable can be found in the [Dashlane Secure Notes - Canturi](https://www.dashlane.com/)
 
 ```bash
 theme get --password="[your-password]" --store="[your-store.myshopify.com]" --themeid="[your-theme-id]"
