@@ -34,7 +34,7 @@
   </div>
 {% else %}
   <div class="product-item {{ grid_width_small }} {{ grid_width_medium }} {{ grid_width_large }} {{ lastElementClass }}">
-    <a id="product-{{ product.variants.first.id }}" class="product-link" href="{{ product.url | within: collection }}" aria-label='{{ product.title }}'>
+    <a id="product-{{ product.variants.first.id }}" class="product-link" href="{{ product.url }}" aria-label='{{ product.title }}'>
 
       {% capture over_image_content %}
         {% if product.compare_at_price > product.price and settings.sale_tags_enable %}

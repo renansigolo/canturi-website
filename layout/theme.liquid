@@ -33,15 +33,18 @@
   {% endcapture %}
     <title>{{ seo_title }}</title>
 
-    {% if page_description %}
+    {% comment %} {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     {% include 'social-meta' %}
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     <script>
+      {% comment %} if (window.location.pathname === "/collections/all") {
+        window.location.replace(`https://${window.location.hostname}/collections/jewellery`);
+      } {% endcomment %}
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 
       window.theme = {

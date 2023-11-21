@@ -68,7 +68,7 @@
            data-aspectratio="{{ image.aspect_ratio }}"
            data-sizes="auto"
            alt="{{ image.alt | escape }}"
-           itemprop="image"
+           {% if disabled_by_yoast_seo %}itemprop="image"{% endif %}
            >
          <noscript>
           <img src="{{ image | img_url: 'small' }}" alt="{{ image.alt | escape }}">

@@ -173,6 +173,9 @@
   </div>
 </header>
 
+{%- comment -%}Yoast SEO schema control block: start.{%- endcomment -%}
+{%- assign yoast_seo_settings = shop.metafields.yoast_seo.settings.value | default: shop.metafields.yoast_seo.settings -%}
+{%- if disabled_by_yoast_seo or yoast_seo_settings.schema.useTheme.schema or yoast_seo_settings.schema.useTheme.organization -%}
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -193,11 +196,16 @@
   ],
   "url": {{ shop.url | append: page.url | json }}
 }
+{%- comment -%}Yoast SEO schema control block: end.{%- endcomment -%}
 </script>
+{%- endif -%}
 
 {% if template.name == 'index' %}
   {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-  <script type="application/ld+json">
+  {%- comment -%}Yoast SEO schema control block: start.{%- endcomment -%}
+{%- assign yoast_seo_settings = shop.metafields.yoast_seo.settings.value | default: shop.metafields.yoast_seo.settings -%}
+{%- if disabled_by_yoast_seo or yoast_seo_settings.schema.useTheme.schema or yoast_seo_settings.schema.useTheme.website -%}
+<script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "WebSite",
@@ -209,7 +217,9 @@
       },
       "url": {{ shop.url | append: page.url | json }}
     }
-  </script>
+  {%- comment -%}Yoast SEO schema control block: end.{%- endcomment -%}
+</script>
+{%- endif -%}
 {% endif %}
 
 {% schema %}
